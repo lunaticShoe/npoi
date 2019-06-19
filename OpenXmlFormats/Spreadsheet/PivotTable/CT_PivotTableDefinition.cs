@@ -2243,7 +2243,8 @@ namespace NPOI.OpenXmlFormats.Spreadsheet
         {
             sw.Write(string.Format("<{0}", nodeName));
             XmlHelper.WriteAttribute(sw, "name", this.name);
-            XmlHelper.WriteAttribute(sw, "axis", this.axis.ToString());
+            if (this.items != null && items.count > 0)
+                XmlHelper.WriteAttribute(sw, "axis", this.axis.ToString());
             XmlHelper.WriteAttribute(sw, "dataField", this.dataField);
             XmlHelper.WriteAttribute(sw, "subtotalCaption", this.subtotalCaption);
             XmlHelper.WriteAttribute(sw, "showDropDowns", this.showDropDowns);
@@ -2291,11 +2292,11 @@ namespace NPOI.OpenXmlFormats.Spreadsheet
             XmlHelper.WriteAttribute(sw, "showPropAsCaption", this.showPropAsCaption);
             XmlHelper.WriteAttribute(sw, "defaultAttributeDrillState", this.defaultAttributeDrillState);
             sw.Write(">");
-            if (this.items != null)
+            if (this.items != null && items.count > 0)
                 this.items.Write(sw, "items");
-            if (this.autoSortScope != null)
-                this.autoSortScope.Write(sw, "autoSortScope");
-            if (this.extLst != null)
+            //if (this.autoSortScope != null)
+            //    this.autoSortScope.Write(sw, "autoSortScope");
+            if (this.extLst != null && extLst.ext != null && extLst.ext.Count > 0)
                 this.extLst.Write(sw, "extLst");
             sw.Write(string.Format("</{0}>", nodeName));
         }
@@ -3375,9 +3376,9 @@ namespace NPOI.OpenXmlFormats.Spreadsheet
             XmlHelper.WriteAttribute(sw, "s", this.s);
             XmlHelper.WriteAttribute(sw, "sd", this.sd);
             XmlHelper.WriteAttribute(sw, "f", this.f);
-            XmlHelper.WriteAttribute(sw, "m", this.m);
+            XmlHelper.WriteAttribute(sw, "m", this.m,false);
             XmlHelper.WriteAttribute(sw, "c", this.c);
-            XmlHelper.WriteAttribute(sw, "x", this.x);
+            XmlHelper.WriteAttribute(sw, "x", this.x,true);
             XmlHelper.WriteAttribute(sw, "d", this.d);
             XmlHelper.WriteAttribute(sw, "e", this.e);
             sw.Write(">");
@@ -3831,7 +3832,7 @@ namespace NPOI.OpenXmlFormats.Spreadsheet
         internal void Write(StreamWriter sw, string nodeName)
         {
             sw.Write(string.Format("<{0}", nodeName));
-            XmlHelper.WriteAttribute(sw, "x", this.x);
+            XmlHelper.WriteAttribute(sw, "x", this.x, true);
             sw.Write(">");
             sw.Write(string.Format("</{0}>", nodeName));
         }
@@ -4674,7 +4675,7 @@ namespace NPOI.OpenXmlFormats.Spreadsheet
             XmlHelper.WriteAttribute(sw, "baseItem", this.baseItem);
             XmlHelper.WriteAttribute(sw, "numFmtId", this.numFmtId);
             sw.Write(">");
-            if (this.extLst != null)
+            if (this.extLst != null && extLst.ext != null && extLst.ext.Count > 0)
                 this.extLst.Write(sw, "extLst");
             sw.Write(string.Format("</{0}>", nodeName));
         }
@@ -5762,9 +5763,9 @@ namespace NPOI.OpenXmlFormats.Spreadsheet
             XmlHelper.WriteAttribute(sw, "includeNewItemsInFilter", this.includeNewItemsInFilter);
             XmlHelper.WriteAttribute(sw, "caption", this.caption);
             sw.Write(">");
-            if (this.mps != null)
+            if (this.mps != null && mps.count > 0)
                 this.mps.Write(sw, "mps");
-            if (this.extLst != null)
+            if (this.extLst != null && extLst.ext != null && extLst.ext.Count > 0)
                 this.extLst.Write(sw, "extLst");
             if (this.members != null)
             {

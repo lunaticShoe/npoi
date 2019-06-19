@@ -66,7 +66,7 @@ namespace NPOI.OpenXmlFormats.Spreadsheet
             sw.Write("xmlns:s=\"http://schemas.openxmlformats.org/officeDocument/2006/sharedTypes\" ");
             XmlHelper.WriteAttribute(sw, "count", this.count);
             sw.Write(">");
-            if (this.extLst != null)
+            if (this.extLst != null && extLst.ext != null && extLst.ext.Count > 0)
                 this.extLst.Write(sw, "extLst");
             foreach (object o in this.r)
             {

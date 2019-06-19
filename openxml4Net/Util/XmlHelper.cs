@@ -354,9 +354,10 @@ namespace NPOI.OpenXml4Net.Util
         {
             if (value == null)
                 return;
-            WriteAttribute(sw, attributeName, value.ToString(), false);
+            WriteAttribute(sw, attributeName, value?.ToString("yyyy-MM-ddTHH:mm:ss"), false);
+            //Console.WriteLine($"debug WriteAttribute attribute = {attributeName}; value = {value.ToString()}");
             //how to write xsd:datetime data
-            throw new NotImplementedException();
+         //   throw new NotImplementedException();
         }
         public static void LoadXmlSafe(XmlDocument xmlDoc, Stream stream)
         {
